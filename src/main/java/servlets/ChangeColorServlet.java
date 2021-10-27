@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/changeColorServlet")
 public class ChangeColorServlet extends HttpServlet {
@@ -16,15 +17,19 @@ public class ChangeColorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        ArrayList<Boolean> arrayList;
+        List<Boolean> arrayList;
         if (session.getAttribute("color") != null) {
-            arrayList = (ArrayList<Boolean>) session.getAttribute("color");
+            arrayList = (List<Boolean>) session.getAttribute("color");
         } else arrayList = new ArrayList<>();
-        if (Integer.parseInt(String.valueOf(req.getParameter("args"))) == 1) {
-            arrayList.add(true);
-        } else arrayList.add(false);
-        session.setAttribute("color", arrayList);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        if (req.getParameter("args") != null) {
+            if (Integer.parseInt(String.valueOf(req.getParameter("args"))) == 1) {
+                arrayList.add(true);
+            } else arrayList.add(false);
+            session.setAttribute("color", arrayList);
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        } else {
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -16,8 +16,12 @@ public class ClearTableServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute("resultData");
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        if (req.getParameter("command") != null) {
+            req.getSession().removeAttribute("resultData");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        } else {
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

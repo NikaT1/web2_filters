@@ -4,8 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let param_r;
 
     function sendRequest(command, args) {
-        let result = prompt("Введите кодовое слово", "");
-        result = "Bearer "+result;
+        let result = "";
+        let auth = document.getElementById("auth").value;
+        if (auth == "false") {
+            result = prompt("Введите кодовое слово", "");
+            result = "Bearer " + result;
+        }
         $.ajax({
             type: 'GET',
             url: 'controller',
@@ -76,8 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
     function sendRequestWithArgs() {
-        let result = prompt("Введите кодовое слово", "");
-        result = "Bearer "+result;
+        let result = "";
+        let auth = document.getElementById("auth").value;
+        if (auth == "false") {
+            result = prompt("Введите кодовое слово", "");
+            result = "Bearer " + result;
+        }
         $.ajax({
             type: 'GET',
             url: 'controller',

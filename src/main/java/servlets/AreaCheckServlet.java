@@ -39,7 +39,8 @@ public class AreaCheckServlet extends HttpServlet {
             param_y = req.getParameter("y").replace(",", ".");
             param_r = req.getParameter("r").replace(",", ".");
         } else {
-            getServletContext().getRequestDispatcher("/index.js").forward(req, resp);
+            getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
+            return;
         }
         if (checkAll(param_x, param_y, param_r)) {
             isValid = true;
@@ -69,7 +70,7 @@ public class AreaCheckServlet extends HttpServlet {
         DataFromTable dataFromTable = new DataFromTable(x, y, r, time, scriptTime, answer, isValid);
         arrayList.add(dataFromTable);
         session.setAttribute("resultData", arrayList);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/table.jsp").forward(req, resp);
     }
 
     private double getRoundDouble(double value, int count) {

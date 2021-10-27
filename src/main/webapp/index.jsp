@@ -285,6 +285,10 @@
 </head>
 <%
     session = request.getSession();
+    boolean auth = false;
+    if (session.getAttribute("auth") != null) {
+        auth = (boolean) session.getAttribute("auth");
+    }
     String prefix = "";
     String src = "images/pic3.png";
     if (session.getAttribute("color") != null) {
@@ -309,6 +313,7 @@
                                     <button class="button" id="changeColor">
                                         сменить тему
                                     </button>
+                                    <input id = "auth" name="auth" type="hidden" value="<%=auth%>" />
                                 </td>
                             </tr>
                         </table>
@@ -386,9 +391,9 @@
                                             <text x="107" y="140" font-size="15" class="<%=prefix%>svg-text">-R/2</text>
                                             <text x="107" y="180" font-size="15" class="<%=prefix%>svg-text">-R</text>
                                             <%
-                                                ArrayList<DataFromTable> arrayList;
+                                                List<DataFromTable> arrayList;
                                                 if (session.getAttribute("resultData") != null) {
-                                                    arrayList = (ArrayList<DataFromTable>) session.getAttribute("resultData");
+                                                    arrayList = (List<DataFromTable>) session.getAttribute("resultData");
                                                     double r = arrayList.get(arrayList.size() - 1).getR();
                                                     for (DataFromTable dataFromTable : arrayList) {
                                                         if (dataFromTable.getIsValid()) {
@@ -413,43 +418,14 @@
                                 <td>
                                     <img id="imagine3" class="<%=prefix%>imagine3" src="<%=src%>" alt="Милый хомячок"/>
                                 </td>
+                                <%
+                                if (session.getAttribute("resultData") != null) {
+                                    arrayList = (List<DataFromTable>) session.getAttribute("resultData");
+                                } else arrayList = new ArrayList<>();
+                                %>
                                 <td rowspan="2" class="<%=prefix%>background" id="result-td">
                                     <div id="result-div">
-                                        <table id="result-table" class="result-style">
-                                            <tr>
-                                                <th id="real-time" class="result-style">Текущее время</th>
-                                                <th id="time" class="result-style">Время исполнения</th>
-                                                <th id="X" class="result-style">X</th>
-                                                <th id="Y" class="result-style">Y</th>
-                                                <th id="R" class="result-style">R</th>
-                                                <th id="flag" class="result-style">Результат</th>
-                                            </tr>
-                                            <%
-                                                if (session.getAttribute("resultData") != null) {
-                                                    arrayList = (ArrayList<DataFromTable>) session.getAttribute("resultData");
-                                                    for (DataFromTable dataFromTable : arrayList) {
-                                                        if (dataFromTable.getIsValid()) {
-                                            %>
-                                            <tr>
-                                                <td><%=dataFromTable.getTime()%>
-                                                </td>
-                                                <td><%=dataFromTable.getScripTime()%>
-                                                </td>
-                                                <td><%=dataFromTable.getX()%>
-                                                </td>
-                                                <td><%=dataFromTable.getY()%>
-                                                </td>
-                                                <td><%=dataFromTable.getR()%>
-                                                </td>
-                                                <td><%=dataFromTable.getAnswer()%>
-                                                </td>
-                                            </tr>
-                                            <%
-                                                        }
-                                                    }
-                                                } else arrayList = new ArrayList<>();
-                                            %>
-                                        </table>
+                                        <jsp:include page="/table.jsp"/>
                                     </div>
                                 </td>
                             </tr>
