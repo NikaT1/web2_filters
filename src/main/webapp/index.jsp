@@ -43,7 +43,7 @@
                                     <button class="button" id="changeColor">
                                         сменить тему
                                     </button>
-                                    <input id = "auth" name="auth" type="hidden" value="<%=auth%>" />
+                                    <input id="auth" name="auth" type="hidden" value="<%=auth%>"/>
                                 </td>
                             </tr>
                         </table>
@@ -126,9 +126,8 @@
                                                     arrayList = (List<DataFromTable>) session.getAttribute("resultData");
                                                     double r = arrayList.get(arrayList.size() - 1).getR();
                                                     for (DataFromTable dataFromTable : arrayList) {
-                                                        if (dataFromTable.isValid()) {
-                                                            String classCoord = prefix + "coord";
-                                                            if (dataFromTable.getR() != r) classCoord = "old-coord";
+                                                        String classCoord = prefix + "coord";
+                                                        if (dataFromTable.getR() != r) classCoord = "old-coord";
                                             %>
                                             <circle class="<%=classCoord%>" r="3"
                                                     cx="<%=80 * dataFromTable.getX()/r + 100%>"
@@ -138,7 +137,6 @@
                                                     data-r="<%=dataFromTable.getR()%>">
                                             </circle>
                                             <%
-                                                        }
                                                     }
                                                 }
                                             %>
@@ -149,9 +147,42 @@
                                     <img id="imagine3" class="<%=prefix%>imagine3" src="<%=src%>" alt="Милый хомячок"/>
                                 </td>
                                 <%
-                                if (session.getAttribute("resultData") != null) {
-                                    arrayList = (List<DataFromTable>) session.getAttribute("resultData");
-                                } else arrayList = new ArrayList<>();
+                                    if
+                                    (
+                                            session
+                                                    .
+                                                            getAttribute
+                                                                    (
+                                                                            "resultData"
+                                                                    )
+                                                    !=
+                                                    null
+                                    ) {
+                                        arrayList
+                                                =
+                                                (
+                                                        List
+                                                                <
+                                                                        DataFromTable
+                                                                        >
+                                                        )
+                                                        session
+                                                                .
+                                                                        getAttribute
+                                                                                (
+                                                                                        "resultData"
+                                                                                )
+                                        ;
+                                    } else
+                                        arrayList
+                                                =
+                                                new
+                                                        ArrayList
+                                                                <
+                                                                        >
+                                                        (
+                                                        )
+                                                ;
                                 %>
                                 <td rowspan="2" class="<%=prefix%>background" id="result-td">
                                     <div id="result-div">
@@ -161,14 +192,73 @@
                             </tr>
                             <tr>
                                 <%
-                                    String x = "";
-                                    double y = -2.0;
-                                    double r = 1;
-                                    if (arrayList.size() > 0) {
-                                        DataFromTable result = arrayList.get(arrayList.size() - 1);
-                                        x = String.valueOf(result.getX());
-                                        y = result.getY();
-                                        r = result.getR();
+                                    String
+                                            x
+                                            =
+                                            "";
+                                    double
+                                            y
+                                            =
+                                            -
+                                                    2.0;
+                                    double
+                                            r
+                                            =
+                                            1;
+                                    if
+                                    (
+                                            arrayList
+                                                    .
+                                                            size
+                                                                    (
+                                                                    )
+                                                    >
+                                                    0
+                                    ) {
+                                        DataFromTable
+                                                result
+                                                =
+                                                arrayList
+                                                        .
+                                                                get
+                                                                        (
+                                                                                arrayList
+                                                                                        .
+                                                                                                size
+                                                                                                        (
+                                                                                                        )
+                                                                                        -
+                                                                                        1
+                                                                        );
+                                        x
+                                                =
+                                                String
+                                                        .
+                                                                valueOf
+                                                                        (
+                                                                                result
+                                                                                        .
+                                                                                                getX
+                                                                                                        (
+                                                                                                        )
+                                                                        )
+                                        ;
+                                        y
+                                                =
+                                                result
+                                                        .
+                                                                getY
+                                                                        (
+                                                                        )
+                                        ;
+                                        r
+                                                =
+                                                result
+                                                        .
+                                                                getR
+                                                                        (
+                                                                        )
+                                        ;
                                     }
 
                                 %>
@@ -184,9 +274,52 @@
                                         <tr>
                                             <td>Y:</td>
                                             <td><select size="1" id="selectY">
-                                                <% List<Double> arrayY = Arrays.asList(-2.0, -1.5, -1.0, -0.5, -0d, 0.5, 1.0, 1.5, 2.0);
-                                                    for (double value : arrayY) {
-                                                        if (y == value) {%>
+                                                <% List
+                                                        <
+                                                                Double
+                                                                >
+                                                        arrayY
+                                                        =
+                                                        Arrays
+                                                                .
+                                                                        asList
+                                                                                (
+                                                                                        -
+                                                                                                2.0
+                                                                                        ,
+                                                                                        -
+                                                                                                1.5
+                                                                                        ,
+                                                                                        -
+                                                                                                1.0
+                                                                                        ,
+                                                                                        -
+                                                                                                0.5
+                                                                                        ,
+                                                                                        -
+                                                                                                0d
+                                                                                        ,
+                                                                                        0.5
+                                                                                        ,
+                                                                                        1.0
+                                                                                        ,
+                                                                                        1.5
+                                                                                        ,
+                                                                                        2.0
+                                                                                );
+                                                    for
+                                                    (
+                                                            double
+                                                                    value
+                                                            :
+                                                            arrayY
+                                                    ) {
+                                                        if
+                                                        (
+                                                                y
+                                                                        ==
+                                                                        value
+                                                        ) {%>
                                                 <option value="<%=value%>" selected><%=value%>
                                                 </option>
                                                 <%
@@ -205,9 +338,39 @@
                                             <td>
                                                 <table id="r-table">
                                                     <tr>
-                                                        <% List<Double> arrayR = Arrays.asList(1.0, 1.5, 2.0, 2.5, 3.0);
-                                                            for (double value : arrayR) {
-                                                                if (r == value) {%>
+                                                        <% List
+                                                                <
+                                                                        Double
+                                                                        >
+                                                                arrayR
+                                                                =
+                                                                Arrays
+                                                                        .
+                                                                                asList
+                                                                                        (
+                                                                                                1.0
+                                                                                                ,
+                                                                                                1.5
+                                                                                                ,
+                                                                                                2.0
+                                                                                                ,
+                                                                                                2.5
+                                                                                                ,
+                                                                                                3.0
+                                                                                        );
+                                                            for
+                                                            (
+                                                                    double
+                                                                            value
+                                                                    :
+                                                                    arrayR
+                                                            ) {
+                                                                if
+                                                                (
+                                                                        r
+                                                                                ==
+                                                                                value
+                                                                ) {%>
                                                         <td>
                                                             <label> <input name="rCheckBox" id="defaultBox"
                                                                            type="checkbox"
@@ -217,7 +380,9 @@
                                                                 </p>
                                                             </label>
                                                         </td>
-                                                        <%} else {%>
+                                                        <%
+                                                        } else {
+                                                        %>
                                                         <td>
                                                             <label>
                                                                 <input name="rCheckBox" type="checkbox"

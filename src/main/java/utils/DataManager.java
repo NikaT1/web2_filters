@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class DataManager {
 
-    private Validation validation = new Validation();
-    private CommonUtils commonUtils = new CommonUtils();
+    private final Validation validation = new Validation();
+    private final CommonUtils commonUtils = new CommonUtils();
 
     private boolean rectangle(double x, double y, double r) {
         return x >= 0 && x <= r && y >= 0 && y <= r;
@@ -27,7 +27,6 @@ public class DataManager {
 
     public DataFromTable createData(HttpServletRequest req) {
         long start = System.nanoTime();
-        boolean isValid;
         String answer, param_x, param_y, param_r;
         if (req.getParameter("x") == null || req.getParameter("y") == null || req.getParameter("r") == null) {
             return null;
@@ -39,7 +38,6 @@ public class DataManager {
         if (!validation.checkAll(param_x, param_y, param_r)) {
             return null;
         }
-        isValid = true;
         x = Double.parseDouble(param_x);
         y = Double.parseDouble(param_y);
         r = Double.parseDouble(param_r);
@@ -50,7 +48,7 @@ public class DataManager {
         x = commonUtils.getRoundDouble(x, 3);
         y = commonUtils.getRoundDouble(y, 3);
         String time = commonUtils.getTime();
-        return new DataFromTable(x, y, r, time, answer, isValid, scriptTime);
+        return new DataFromTable(x, y, r, time, answer, scriptTime);
     }
 
 }

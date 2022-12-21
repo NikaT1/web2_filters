@@ -13,6 +13,5 @@ public class DataFromTable {
     private double r;
     private String time;
     private String answer;
-    private boolean isValid;
     private double scripTime;
 }

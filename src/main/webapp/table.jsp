@@ -18,7 +18,6 @@
         if (session.getAttribute("resultData") != null) {
             arrayList = (List<DataFromTable>) session.getAttribute("resultData");
             for (DataFromTable dataFromTable : arrayList) {
-                if (dataFromTable.getIsValid()) {
     %>
     <tr>
         <td><%=dataFromTable.getTime()%>
@@ -35,7 +34,6 @@
         </td>
     </tr>
     <%
-                }
             }
         } else arrayList = new ArrayList<>();
     %>
