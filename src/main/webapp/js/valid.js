@@ -3,6 +3,25 @@ document.addEventListener('DOMContentLoaded', function () {
     let param_y;
     let param_r;
 
+    function getXmlHttpReq() {
+        let req = new XMLHttpRequest();
+        try {
+            if (window.XMLHttpRequest) {
+                req = new XMLHttpRequest();
+            } else {
+                if (window.ActiveXObject) {
+                    try {
+                        req = new ActiveXObject("Msxml2.XMLHTTP");
+                    } catch (e) {
+                        req = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                }
+            }
+        } catch (ex) {
+        }
+        return req;
+    }
+
     function sendRequest(command, args) {
         let result = "";
         let auth = document.getElementById("auth").value;
@@ -10,7 +29,25 @@ document.addEventListener('DOMContentLoaded', function () {
             result = prompt("Введите кодовое слово", "");
             result = "Bearer " + result;
         }
-        $.ajax({
+        const req = getXmlHttpReq();
+        const url = 'controller?' + 'command=' + command.toString() +
+            '&args=' + args.toString();
+        req.open("GET", url, true);
+        req.setRequestHeader("Authorization", result);
+        req.addEventListener("readystatechange", () => {
+            try {
+                if (req.readyState === 4 && req.status === 200) {
+                    window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
+                }
+                if (req.readyState === 4 && req.status === 401) {
+                    alert("Проверка на Сервер не прошла");
+                }
+            } catch (e) {
+                alert("Проверка на Сервер не прошла");
+            }
+        });
+        req.send();
+        /*$.ajax({
             type: 'GET',
             url: 'controller',
             data: {
@@ -24,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
             error: function () {
                 alert("Проверка на Сервер не прошла");
             }
-        });
+        });*/
     }
 
     document.querySelectorAll('input[name="rCheckBox"]').forEach(x => x.addEventListener("change", (function () {
@@ -86,7 +123,26 @@ document.addEventListener('DOMContentLoaded', function () {
             result = prompt("Введите кодовое слово", "");
             result = "Bearer " + result;
         }
-        $.ajax({
+        const req = getXmlHttpReq();
+        const url = 'controller?' + 'x=' + param_x.toString() +
+            '&y=' + param_y.toString() +
+            '&r=' + param_r.toString();
+        req.open("GET", url, true);
+        req.setRequestHeader("Authorization", result);
+        req.addEventListener("readystatechange", () => {
+            try {
+                if (req.readyState === 4 && req.status === 200) {
+                    window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
+                }
+                if (req.readyState === 4 && req.status === 401) {
+                    alert("Проверка на Сервер не прошла");
+                }
+            } catch (e) {
+                alert("Проверка на Сервер не прошла");
+            }
+        });
+        req.send();
+       /* $.ajax({
             type: 'GET',
             url: 'controller',
             data: {
@@ -96,12 +152,12 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             headers: {'Authorization': result},
             success: function () {
-                window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
+                //window.location.href = '/web2-1.0-SNAPSHOT/index.jsp';
             },
             error: function () {
                 alert("Проверка на Сервер не прошла");
             }
-        });
+        });*/
     }
 
     document.querySelectorAll('input[name="rCheckBox"]').forEach(r => r.addEventListener('change', function () {

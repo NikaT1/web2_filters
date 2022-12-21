@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="styles/stylesheet/stylesheet_table.css"/>
+<link rel="stylesheet" href="styles/dark_stylesheet/stylesheet_table_dark.css"/>
 <table id="result-table" class="result-style">
     <tr>
         <th id="real-time" class="result-style">Текущее время</th>

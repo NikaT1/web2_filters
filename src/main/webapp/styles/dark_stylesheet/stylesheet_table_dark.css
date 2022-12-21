@@ -1,0 +1,13 @@
+.dark-svg-line-color {
+    stroke: rgb(193, 162, 203);
+}
+
+.dark-svg-figure-color {
+    fill: rgba(79, 50, 91, 0.73);
+    stroke: rgba(186, 129, 255, 0.73);
+}
+
+.dark-svg-text {
+    stroke: rgb(214, 196, 224);
+    fill: rgb(214, 196, 224);
+}

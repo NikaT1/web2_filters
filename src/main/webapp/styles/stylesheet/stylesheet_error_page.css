@@ -1,0 +1,13 @@
+.div_class {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    display: grid;
+}
+
+#imagine {
+    alignment: center;
+    width: 100%;
+    height: 100%;
+}
+
