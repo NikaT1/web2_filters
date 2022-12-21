@@ -15,6 +15,7 @@ public class ErrorServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         getServletContext().getRequestDispatcher("/error.jsp").forward(req, resp);
     }
